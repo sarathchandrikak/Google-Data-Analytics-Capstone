@@ -29,10 +29,13 @@ library(ggplot2)
 library(tidyverse)
 library(hrbrthemes)
 library(viridis)
+library(corrplot)
 library(ggcorrplot)
 
 # Data Pre-processing 
 
+str(dailyactivity)
+summary(dailyactivity)
 # Splitting into separate date and time columns
 
 str(heartrate_second)
@@ -45,6 +48,7 @@ heartrate_second<-
 View(heartrate_second)
 
 str(sleepday)
+summary(sleepday)
 sleepday <- 
   sleepday %>%
   separate(SleepDay, c("Date", "Time"), " ")
@@ -52,6 +56,7 @@ sleepday <-
 View(sleepday)
 
 str(weightlog)
+summary(weightlog)
 weightlog <- 
   weightlog %>%
   separate(Date, c("Date", "Time"), " ")
@@ -127,7 +132,7 @@ which(is.na(weightlog))
 # Most of the values in fat column of weight log are Null, so removing that column 
 
 weightlog <- weightlog[-c(6)]
-
+View(weightlog)
 # Creating a data frame with common users from all the data frames
 
 combined_df <- merge(dailyactivity, sleepday, by.x=c("Id", "ActivityDate"), by.y=c("Id", "Date"))
@@ -148,19 +153,21 @@ which(is.na(heartrate_second))
 dim(heartrate_second)
 heartrate_second <- na.omit(heartrate_second)
 breaks <- hour(hm("6:00", "12:00", "16:00", "19:00", "23:59"))
+
 # labels for the breaks
+
 labels <- c("Morning", "Afternoon", "Evening", "Night")
 heartrate_second$Time_of_day <- cut(x=hour(heartrate_second$time), breaks = breaks, labels = labels, include.lowest=TRUE)
 
 
 # Plotting Data on graphs
 
-# Sleep Data - Visualization between TotalMinAsleep and TotalTimeinBed
+# Sleep Data - Visualization between Total Min Asleep and Total Time in Bed
 
 ggplot(data=sleepday, aes(x=TotalMinutesAsleep, y=TotalTimeInBed)) + 
   geom_point() + 
   geom_smooth(method=lm) +
-  labs(title="Relationship between Total Minutes Asleep and Total Time in Bed")
+  labs(title="Total Minutes Asleep vs Total Time in Bed") 
 
 # From the graph it is clear that both the points are almost around the straight line except for few.
 # We can consider this people mostly fall asleep right after they get into bed. By this Bellabeat can
@@ -192,22 +199,48 @@ ggplot(data = heartbeat_grouping, aes(x=Time_of_day, y=MeanValue)) +
 ggplot(data=dailyactivity, aes(x=TotalSteps, y=Calories)) + 
   geom_point() + 
   geom_smooth(method=lm) +
-  labs(title="Relationship between Total Steps and Total Calories")
+  labs(title="Total Steps VS Total Calories")
 
 # Total distance vs Total steps
 
 ggplot(data=dailyactivity, aes(x=TotalSteps, y=TotalDistance)) +
   geom_point() + 
   geom_smooth(method = lm) +
-  labs(title = "Relationship between Total Steps and Distance")
+  labs(title = "Total Steps VS Distance")
 
 # Total distance vs Tracker Distance
 
 ggplot(data=dailyactivity, aes(x=TrackerDistance, y=TotalDistance)) +
   geom_point() + 
-  geom_smooth(method = lm) +
-  labs(title = "Relationship between Tracker Distance vs Total Distance")
+  geom_smooth(aes(x=TrackerDistance, y=TotalDistance)) +
+  labs(title = "Tracker Distance VS Total Distance")
 
+# Very Active Minutes vs Calories
+ggplot(data=dailyactivity, aes(x=VeryActiveMinutes , y=Calories)) +
+  geom_point() + 
+  geom_smooth(aes(x=VeryActiveMinutes , y=Calories)) +
+  labs(title = "Very Active Minutes VS Calories")
+
+# Fairly Active Minutes vs Calories
+
+ggplot(data=dailyactivity, aes(x=FairlyActiveMinutes, y=Calories)) +
+  geom_point() + 
+  geom_smooth(aes(x=FairlyActiveMinutes , y=Calories)) +
+  labs(title = "Fairly Active Minutes VS Calories")
+
+# Lightly Active Minutes vs Calories
+ggplot(data=dailyactivity, aes(x=LightlyActiveMinutes, y=Calories)) +
+  geom_point() + 
+  geom_smooth(aes(x=LightlyActiveMinutes, y=Calories)) +
+  labs(title = "Lightly Active Minutes vs Calories")
+export.type <- "jpeg"
+export.filename <- "Lightly Active Minutes vs Calories.jpeg"
+export.height <- 123
+export.width<- 123
+
+export.func <- paste0(export.type,"(",export.filename,")")
+
+eval(parse(text="export.func"))
 
 # Correlation Matrix of daily activity data
 
@@ -215,23 +248,45 @@ selected_columns <- select(dailyactivity, TotalSteps, TotalDistance, VeryActiveM
 corr = cor(selected_columns)
 corrplot(corr, method = 'number')
 
+# Graphs on combined_data of 3 records
+
+ggplot(data=combined_df, aes(x=VeryActiveMinutes, y=BMI)) +
+  geom_point() + 
+  geom_smooth(orientation = "x") +
+  labs(title = "Very Active Minutes vs BMI")
+
+ggplot(data=combined_df, aes(x=FairlyActiveMinutes, y=BMI)) +
+  geom_point() + 
+  geom_smooth(orientation = "x") +
+  labs(title = "Fairly Active Minutes vs Total Minutes Asleep")
+
+ggplot(data=combined_df, aes(x=LightlyActiveMinutes, y=BMI)) +
+  geom_point() + 
+  geom_smooth(orientation = "x") +
+  labs(title = "Very Active Minutes vs Total Minutes Asleep")
+
 # Saving Modified Files
 
 write_csv(x = heartbeat_grouping, "heartbeat_timeofday.csv")
 write_csv(x = heartbeat_daily, "heartbeat_daywise.csv")
 write_csv(x = combined_df, "combined_data.csv")
 
+
+combined_df %>%
+  select(FairlyActiveMinutes,
+         VeryActiveMinutes,
+         LightlyActiveMinutes,
+         TotalMinutesAsleep,
+         BMI) %>%
+  summary()
+
+ggplot(data=combined_df, aes(x=FairlyActiveMinutes, y=BMI)) +
+  geom_bar(stat="identity")
+
+library(tidyr)
+library(ggplot2)
+
+summary(heartrate_second)
+
   
   
-
-
-
-
-
-
-  
-
-
-
-
-

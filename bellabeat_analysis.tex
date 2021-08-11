@@ -1,0 +1,1003 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={bellabeat\_analysis.R},
+  pdfauthor={sarathchandrikak},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\title{bellabeat\_analysis.R}
+\author{sarathchandrikak}
+\date{2021-08-11}
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Reading files}
+
+\NormalTok{dailyactivity }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Fitabase Data 4.12.16{-}5.12.16/dailyActivity\_merged.csv"}\NormalTok{)}
+\NormalTok{dailycalories }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Fitabase Data 4.12.16{-}5.12.16/dailyCalories\_merged.csv"}\NormalTok{)}
+\NormalTok{dailyintensities }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Fitabase Data 4.12.16{-}5.12.16/dailyIntensities\_merged.csv"}\NormalTok{)}
+\NormalTok{dailysteps }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Fitabase Data 4.12.16{-}5.12.16/dailySteps\_merged.csv"}\NormalTok{)}
+\NormalTok{heartrate\_second }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Fitabase Data 4.12.16{-}5.12.16/heartrate\_seconds\_merged.csv"}\NormalTok{)}
+\NormalTok{hourlycalories }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Fitabase Data 4.12.16{-}5.12.16/hourlyCalories\_merged.csv"}\NormalTok{)}
+\NormalTok{hourlyintensities }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Fitabase Data 4.12.16{-}5.12.16/hourlyIntensities\_merged.csv"}\NormalTok{)}
+\NormalTok{hourlySteps }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Fitabase Data 4.12.16{-}5.12.16/hourlySteps\_merged.csv"}\NormalTok{)}
+\NormalTok{minutecalories\_narrow }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Fitabase Data 4.12.16{-}5.12.16/minuteCaloriesNarrow\_merged.csv"}\NormalTok{)}
+\NormalTok{minutecalories\_wide }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Fitabase Data 4.12.16{-}5.12.16/minuteCaloriesWide\_merged.csv"}\NormalTok{)}
+\NormalTok{minuteintensities\_narrow }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Fitabase Data 4.12.16{-}5.12.16/minuteIntensitiesNarrow\_merged.csv"}\NormalTok{)}
+\NormalTok{minuteintensities\_wide }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Fitabase Data 4.12.16{-}5.12.16/minuteIntensitiesWide\_merged.csv"}\NormalTok{)}
+\NormalTok{minutemets\_narrow }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Fitabase Data 4.12.16{-}5.12.16/minuteMETsNarrow\_merged.csv"}\NormalTok{)}
+\NormalTok{minutesleep }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Fitabase Data 4.12.16{-}5.12.16/minuteSleep\_merged.csv"}\NormalTok{)}
+\NormalTok{minutessteps\_narrow }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Fitabase Data 4.12.16{-}5.12.16/minuteStepsNarrow\_merged.csv"}\NormalTok{)}
+\NormalTok{minutesteps\_wide }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Fitabase Data 4.12.16{-}5.12.16/minuteStepsWide\_merged.csv"}\NormalTok{)}
+\NormalTok{sleepday }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Fitabase Data 4.12.16{-}5.12.16/sleepDay\_merged.csv"}\NormalTok{)}
+\NormalTok{weightlog }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"Fitabase Data 4.12.16{-}5.12.16/weightLogInfo\_merged.csv"}\NormalTok{)}
+
+\CommentTok{\# packages}
+
+\FunctionTok{library}\NormalTok{(lubridate)}
+\FunctionTok{library}\NormalTok{(tidyr)}
+\FunctionTok{library}\NormalTok{(stringr)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(hrbrthemes)}
+\FunctionTok{library}\NormalTok{(viridis)}
+\FunctionTok{library}\NormalTok{(ggcorrplot)}
+
+\CommentTok{\# Data Pre{-}processing }
+
+\FunctionTok{str}\NormalTok{(dailyactivity)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    940 obs. of  15 variables:
+##  $ Id                      : num  1.5e+09 1.5e+09 1.5e+09 1.5e+09 1.5e+09 ...
+##  $ ActivityDate            : chr  "4/12/2016" "4/13/2016" "4/14/2016" "4/15/2016" ...
+##  $ TotalSteps              : int  13162 10735 10460 9762 12669 9705 13019 15506 10544 9819 ...
+##  $ TotalDistance           : num  8.5 6.97 6.74 6.28 8.16 ...
+##  $ TrackerDistance         : num  8.5 6.97 6.74 6.28 8.16 ...
+##  $ LoggedActivitiesDistance: num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ VeryActiveDistance      : num  1.88 1.57 2.44 2.14 2.71 ...
+##  $ ModeratelyActiveDistance: num  0.55 0.69 0.4 1.26 0.41 ...
+##  $ LightActiveDistance     : num  6.06 4.71 3.91 2.83 5.04 ...
+##  $ SedentaryActiveDistance : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ VeryActiveMinutes       : int  25 21 30 29 36 38 42 50 28 19 ...
+##  $ FairlyActiveMinutes     : int  13 19 11 34 10 20 16 31 12 8 ...
+##  $ LightlyActiveMinutes    : int  328 217 181 209 221 164 233 264 205 211 ...
+##  $ SedentaryMinutes        : int  728 776 1218 726 773 539 1149 775 818 838 ...
+##  $ Calories                : int  1985 1797 1776 1745 1863 1728 1921 2035 1786 1775 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(dailyactivity)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        Id            ActivityDate         TotalSteps    TotalDistance    TrackerDistance 
+##  Min.   :1.504e+09   Length:940         Min.   :    0   Min.   : 0.000   Min.   : 0.000  
+##  1st Qu.:2.320e+09   Class :character   1st Qu.: 3790   1st Qu.: 2.620   1st Qu.: 2.620  
+##  Median :4.445e+09   Mode  :character   Median : 7406   Median : 5.245   Median : 5.245  
+##  Mean   :4.855e+09                      Mean   : 7638   Mean   : 5.490   Mean   : 5.475  
+##  3rd Qu.:6.962e+09                      3rd Qu.:10727   3rd Qu.: 7.713   3rd Qu.: 7.710  
+##  Max.   :8.878e+09                      Max.   :36019   Max.   :28.030   Max.   :28.030  
+##  LoggedActivitiesDistance VeryActiveDistance ModeratelyActiveDistance LightActiveDistance
+##  Min.   :0.0000           Min.   : 0.000     Min.   :0.0000           Min.   : 0.000     
+##  1st Qu.:0.0000           1st Qu.: 0.000     1st Qu.:0.0000           1st Qu.: 1.945     
+##  Median :0.0000           Median : 0.210     Median :0.2400           Median : 3.365     
+##  Mean   :0.1082           Mean   : 1.503     Mean   :0.5675           Mean   : 3.341     
+##  3rd Qu.:0.0000           3rd Qu.: 2.053     3rd Qu.:0.8000           3rd Qu.: 4.782     
+##  Max.   :4.9421           Max.   :21.920     Max.   :6.4800           Max.   :10.710     
+##  SedentaryActiveDistance VeryActiveMinutes FairlyActiveMinutes LightlyActiveMinutes SedentaryMinutes
+##  Min.   :0.000000        Min.   :  0.00    Min.   :  0.00      Min.   :  0.0        Min.   :   0.0  
+##  1st Qu.:0.000000        1st Qu.:  0.00    1st Qu.:  0.00      1st Qu.:127.0        1st Qu.: 729.8  
+##  Median :0.000000        Median :  4.00    Median :  6.00      Median :199.0        Median :1057.5  
+##  Mean   :0.001606        Mean   : 21.16    Mean   : 13.56      Mean   :192.8        Mean   : 991.2  
+##  3rd Qu.:0.000000        3rd Qu.: 32.00    3rd Qu.: 19.00      3rd Qu.:264.0        3rd Qu.:1229.5  
+##  Max.   :0.110000        Max.   :210.00    Max.   :143.00      Max.   :518.0        Max.   :1440.0  
+##     Calories   
+##  Min.   :   0  
+##  1st Qu.:1828  
+##  Median :2134  
+##  Mean   :2304  
+##  3rd Qu.:2793  
+##  Max.   :4900
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Splitting into separate date and time columns}
+
+\FunctionTok{str}\NormalTok{(heartrate\_second)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    2483658 obs. of  3 variables:
+##  $ Id   : num  2.02e+09 2.02e+09 2.02e+09 2.02e+09 2.02e+09 ...
+##  $ Time : chr  "4/12/2016 7:21:00 AM" "4/12/2016 7:21:05 AM" "4/12/2016 7:21:10 AM" "4/12/2016 7:21:20 AM" ...
+##  $ Value: int  97 102 105 103 101 95 91 93 94 93 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(heartrate\_second)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        Id                Time               Value       
+##  Min.   :2.022e+09   Length:2483658     Min.   : 36.00  
+##  1st Qu.:4.388e+09   Class :character   1st Qu.: 63.00  
+##  Median :5.554e+09   Mode  :character   Median : 73.00  
+##  Mean   :5.514e+09                      Mean   : 77.33  
+##  3rd Qu.:6.962e+09                      3rd Qu.: 88.00  
+##  Max.   :8.878e+09                      Max.   :203.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{heartrate\_second}\OtherTok{\textless{}{-}} 
+\NormalTok{  heartrate\_second }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{separate}\NormalTok{(Time, }\FunctionTok{c}\NormalTok{(}\StringTok{"Date"}\NormalTok{, }\StringTok{"Time"}\NormalTok{), }\StringTok{" "}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Expected 2 pieces. Additional pieces discarded in 2483658 rows [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+## 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, ...].
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{View}\NormalTok{(heartrate\_second)}
+
+\FunctionTok{str}\NormalTok{(sleepday)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    413 obs. of  5 variables:
+##  $ Id                : num  1.5e+09 1.5e+09 1.5e+09 1.5e+09 1.5e+09 ...
+##  $ SleepDay          : chr  "4/12/2016 12:00:00 AM" "4/13/2016 12:00:00 AM" "4/15/2016 12:00:00 AM" "4/16/2016 12:00:00 AM" ...
+##  $ TotalSleepRecords : int  1 2 1 2 1 1 1 1 1 1 ...
+##  $ TotalMinutesAsleep: int  327 384 412 340 700 304 360 325 361 430 ...
+##  $ TotalTimeInBed    : int  346 407 442 367 712 320 377 364 384 449 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(sleepday)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        Id              SleepDay         TotalSleepRecords TotalMinutesAsleep TotalTimeInBed 
+##  Min.   :1.504e+09   Length:413         Min.   :1.000     Min.   : 58.0      Min.   : 61.0  
+##  1st Qu.:3.977e+09   Class :character   1st Qu.:1.000     1st Qu.:361.0      1st Qu.:403.0  
+##  Median :4.703e+09   Mode  :character   Median :1.000     Median :433.0      Median :463.0  
+##  Mean   :5.001e+09                      Mean   :1.119     Mean   :419.5      Mean   :458.6  
+##  3rd Qu.:6.962e+09                      3rd Qu.:1.000     3rd Qu.:490.0      3rd Qu.:526.0  
+##  Max.   :8.792e+09                      Max.   :3.000     Max.   :796.0      Max.   :961.0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sleepday }\OtherTok{\textless{}{-}} 
+\NormalTok{  sleepday }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{separate}\NormalTok{(SleepDay, }\FunctionTok{c}\NormalTok{(}\StringTok{"Date"}\NormalTok{, }\StringTok{"Time"}\NormalTok{), }\StringTok{" "}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Expected 2 pieces. Additional pieces discarded in 413 rows [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,
+## 12, 13, 14, 15, 16, 17, 18, 19, 20, ...].
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{View}\NormalTok{(sleepday)}
+
+\FunctionTok{str}\NormalTok{(weightlog)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    67 obs. of  8 variables:
+##  $ Id            : num  1.50e+09 1.50e+09 1.93e+09 2.87e+09 2.87e+09 ...
+##  $ Date          : chr  "5/2/2016 11:59:59 PM" "5/3/2016 11:59:59 PM" "4/13/2016 1:08:52 AM" "4/21/2016 11:59:59 PM" ...
+##  $ WeightKg      : num  52.6 52.6 133.5 56.7 57.3 ...
+##  $ WeightPounds  : num  116 116 294 125 126 ...
+##  $ Fat           : int  22 NA NA NA NA 25 NA NA NA NA ...
+##  $ BMI           : num  22.6 22.6 47.5 21.5 21.7 ...
+##  $ IsManualReport: chr  "True" "True" "False" "True" ...
+##  $ LogId         : num  1.46e+12 1.46e+12 1.46e+12 1.46e+12 1.46e+12 ...
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(weightlog)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##        Id                Date              WeightKg       WeightPounds        Fat             BMI       
+##  Min.   :1.504e+09   Length:67          Min.   : 52.60   Min.   :116.0   Min.   :22.00   Min.   :21.45  
+##  1st Qu.:6.962e+09   Class :character   1st Qu.: 61.40   1st Qu.:135.4   1st Qu.:22.75   1st Qu.:23.96  
+##  Median :6.962e+09   Mode  :character   Median : 62.50   Median :137.8   Median :23.50   Median :24.39  
+##  Mean   :7.009e+09                      Mean   : 72.04   Mean   :158.8   Mean   :23.50   Mean   :25.19  
+##  3rd Qu.:8.878e+09                      3rd Qu.: 85.05   3rd Qu.:187.5   3rd Qu.:24.25   3rd Qu.:25.56  
+##  Max.   :8.878e+09                      Max.   :133.50   Max.   :294.3   Max.   :25.00   Max.   :47.54  
+##                                                                          NA's   :65                     
+##  IsManualReport         LogId          
+##  Length:67          Min.   :1.460e+12  
+##  Class :character   1st Qu.:1.461e+12  
+##  Mode  :character   Median :1.462e+12  
+##                     Mean   :1.462e+12  
+##                     3rd Qu.:1.462e+12  
+##                     Max.   :1.463e+12  
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weightlog }\OtherTok{\textless{}{-}} 
+\NormalTok{  weightlog }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{separate}\NormalTok{(Date, }\FunctionTok{c}\NormalTok{(}\StringTok{"Date"}\NormalTok{, }\StringTok{"Time"}\NormalTok{), }\StringTok{" "}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Expected 2 pieces. Additional pieces discarded in 67 rows [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+## 13, 14, 15, 16, 17, 18, 19, 20, ...].
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{View}\NormalTok{(weightlog)}
+
+
+\CommentTok{\# Calculating average heartbeat across the day for each person}
+
+\NormalTok{heartbeat\_daily }\OtherTok{\textless{}{-}} 
+  \FunctionTok{tibble}\NormalTok{(heartrate\_second }\SpecialCharTok{\%\textgreater{}\%}
+           \FunctionTok{group\_by}\NormalTok{(Date, Id) }\SpecialCharTok{\%\textgreater{}\%}
+           \FunctionTok{summarise}\NormalTok{(}\AttributeTok{MeanHeartBeat=}\NormalTok{(}\FunctionTok{mean}\NormalTok{(Value))))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `summarise()` has grouped output by 'Date'. You can override using the `.groups` argument.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{View}\NormalTok{(heartbeat\_daily)}
+
+\CommentTok{\# Checking the dimensions of all data files }
+\FunctionTok{dim}\NormalTok{(dailyactivity)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 940  15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(heartbeat\_daily)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 334   3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(sleepday)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 413   6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(weightlog)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 67  9
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Finding unique persons in each data frame }
+
+\FunctionTok{length}\NormalTok{(}\FunctionTok{unique}\NormalTok{(weightlog}\SpecialCharTok{$}\NormalTok{Id))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(}\FunctionTok{unique}\NormalTok{(heartbeat\_daily}\SpecialCharTok{$}\NormalTok{Id))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 14
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(}\FunctionTok{unique}\NormalTok{(sleepday}\SpecialCharTok{$}\NormalTok{Id))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 24
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(}\FunctionTok{unique}\NormalTok{(dailyactivity}\SpecialCharTok{$}\NormalTok{Id))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 33
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 33 is the highest unique values from the dataframe. That is whole of the data is collected from 33 participants.}
+
+\CommentTok{\# Finding duplicates in each data frame}
+
+\FunctionTok{nrow}\NormalTok{(dailyactivity[}\FunctionTok{duplicated}\NormalTok{(dailyactivity),])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nrow}\NormalTok{(heartbeat\_daily[}\FunctionTok{duplicated}\NormalTok{(heartbeat\_daily),])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nrow}\NormalTok{(sleepday[}\FunctionTok{duplicated}\NormalTok{(sleepday),])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{nrow}\NormalTok{(weightlog[}\FunctionTok{duplicated}\NormalTok{(weightlog),])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Removing duplicates from sleepday dataframe}
+
+\NormalTok{sleepdata }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{distinct}\NormalTok{(sleepday)}
+
+\CommentTok{\# Summary of Statistics}
+
+\NormalTok{dailyactivity }\SpecialCharTok{\%\textgreater{}\%}  
+  \FunctionTok{select}\NormalTok{(TotalSteps,}
+\NormalTok{         TotalDistance,}
+\NormalTok{         SedentaryMinutes,}
+\NormalTok{         VeryActiveMinutes) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{summary}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    TotalSteps    TotalDistance    SedentaryMinutes VeryActiveMinutes
+##  Min.   :    0   Min.   : 0.000   Min.   :   0.0   Min.   :  0.00   
+##  1st Qu.: 3790   1st Qu.: 2.620   1st Qu.: 729.8   1st Qu.:  0.00   
+##  Median : 7406   Median : 5.245   Median :1057.5   Median :  4.00   
+##  Mean   : 7638   Mean   : 5.490   Mean   : 991.2   Mean   : 21.16   
+##  3rd Qu.:10727   3rd Qu.: 7.713   3rd Qu.:1229.5   3rd Qu.: 32.00   
+##  Max.   :36019   Max.   :28.030   Max.   :1440.0   Max.   :210.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Since Minimum steps are 0, we can assume the person not being active}
+\CommentTok{\# Active Minutes are around 210}
+
+\FunctionTok{summary}\NormalTok{(heartbeat\_daily)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      Date                 Id            MeanHeartBeat   
+##  Length:334         Min.   :2.022e+09   Min.   : 59.38  
+##  Class :character   1st Qu.:4.388e+09   1st Qu.: 70.47  
+##  Mode  :character   Median :5.577e+09   Median : 77.49  
+##                     Mean   :5.565e+09   Mean   : 78.61  
+##                     3rd Qu.:6.962e+09   3rd Qu.: 84.93  
+##                     Max.   :8.878e+09   Max.   :109.79
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Mean heartbeat is nearby to original value of 72}
+
+\NormalTok{sleepday }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(TotalMinutesAsleep, TotalTimeInBed) }\SpecialCharTok{\%\textgreater{}\%}
+\FunctionTok{summary}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  TotalMinutesAsleep TotalTimeInBed 
+##  Min.   : 58.0      Min.   : 61.0  
+##  1st Qu.:361.0      1st Qu.:403.0  
+##  Median :433.0      Median :463.0  
+##  Mean   :419.5      Mean   :458.6  
+##  3rd Qu.:490.0      3rd Qu.:526.0  
+##  Max.   :796.0      Max.   :961.0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{weightlog }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(WeightKg, BMI) }\SpecialCharTok{\%\textgreater{}\%}
+\FunctionTok{summary}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     WeightKg           BMI       
+##  Min.   : 52.60   Min.   :21.45  
+##  1st Qu.: 61.40   1st Qu.:23.96  
+##  Median : 62.50   Median :24.39  
+##  Mean   : 72.04   Mean   :25.19  
+##  3rd Qu.: 85.05   3rd Qu.:25.56  
+##  Max.   :133.50   Max.   :47.54
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Finding NA and null values in dataframes}
+
+\FunctionTok{which}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(dailyactivity))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## integer(0)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{which}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(heartbeat\_daily))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## integer(0)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{which}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(sleepday))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## integer(0)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{which}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(weightlog))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] 337 338 339 340 342 343 344 345 346 347 348 349 350 351 352 353 354 355 356 357 358 359 360 361 362
+## [26] 363 364 365 366 367 368 369 370 371 372 373 374 375 376 377 378 379 380 381 382 383 384 385 386 387
+## [51] 388 389 390 391 392 393 394 395 396 397 398 399 400 401 402
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Most of the values in fat column of weight log are Null, so removing that column }
+
+\NormalTok{weightlog }\OtherTok{\textless{}{-}}\NormalTok{ weightlog[}\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(}\DecValTok{6}\NormalTok{)]}
+\FunctionTok{View}\NormalTok{(weightlog)}
+\CommentTok{\# Creating a data frame with common users from all the data frames}
+
+\NormalTok{combined\_df }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(dailyactivity, sleepday, }\AttributeTok{by.x=}\FunctionTok{c}\NormalTok{(}\StringTok{"Id"}\NormalTok{, }\StringTok{"ActivityDate"}\NormalTok{), }\AttributeTok{by.y=}\FunctionTok{c}\NormalTok{(}\StringTok{"Id"}\NormalTok{, }\StringTok{"Date"}\NormalTok{))}
+\NormalTok{combined\_df }\OtherTok{=} \FunctionTok{merge}\NormalTok{(combined\_df, weightlog, }\AttributeTok{by.x=}\FunctionTok{c}\NormalTok{(}\StringTok{"Id"}\NormalTok{, }\StringTok{"ActivityDate"}\NormalTok{), }\AttributeTok{by.y=}\FunctionTok{c}\NormalTok{(}\StringTok{"Id"}\NormalTok{, }\StringTok{"Date"}\NormalTok{))}
+\NormalTok{combined\_df }\OtherTok{=} \FunctionTok{merge}\NormalTok{(combined\_df, heartbeat\_daily, }\AttributeTok{by.x=}\FunctionTok{c}\NormalTok{(}\StringTok{"Id"}\NormalTok{, }\StringTok{"ActivityDate"}\NormalTok{), }\AttributeTok{by.y=}\FunctionTok{c}\NormalTok{(}\StringTok{"Id"}\NormalTok{, }\StringTok{"Date"}\NormalTok{))}
+
+\FunctionTok{View}\NormalTok{(combined\_df)}
+\FunctionTok{dim}\NormalTok{(combined\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 32 26
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(}\FunctionTok{unique}\NormalTok{(combined\_df}\SpecialCharTok{$}\NormalTok{Id))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{length}\NormalTok{(}\FunctionTok{unique}\NormalTok{(combined\_df}\SpecialCharTok{$}\NormalTok{ActivityDate))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 30
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# 3 persons recorded all the values at least on one single day. }
+
+\CommentTok{\# Dividing time into morning, afternoon, evening, night for heart data}
+
+\NormalTok{heartrate\_second}\SpecialCharTok{$}\NormalTok{time}\OtherTok{\textless{}{-}} \FunctionTok{dmy\_hms}\NormalTok{(heartrate\_second}\SpecialCharTok{$}\NormalTok{Time)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: All formats failed to parse. No formats found.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{which}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(heartrate\_second))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    [1] 9934633 9934634 9934635 9934636 9934637 9934638 9934639 9934640 9934641 9934642 9934643 9934644
+##   [13] 9934645 9934646 9934647 9934648 9934649 9934650 9934651 9934652 9934653 9934654 9934655 9934656
+##   [25] 9934657 9934658 9934659 9934660 9934661 9934662 9934663 9934664 9934665 9934666 9934667 9934668
+##   [37] 9934669 9934670 9934671 9934672 9934673 9934674 9934675 9934676 9934677 9934678 9934679 9934680
+##   [49] 9934681 9934682 9934683 9934684 9934685 9934686 9934687 9934688 9934689 9934690 9934691 9934692
+##   [61] 9934693 9934694 9934695 9934696 9934697 9934698 9934699 9934700 9934701 9934702 9934703 9934704
+##   [73] 9934705 9934706 9934707 9934708 9934709 9934710 9934711 9934712 9934713 9934714 9934715 9934716
+##   [85] 9934717 9934718 9934719 9934720 9934721 9934722 9934723 9934724 9934725 9934726 9934727 9934728
+##   [97] 9934729 9934730 9934731 9934732 9934733 9934734 9934735 9934736 9934737 9934738 9934739 9934740
+##  [109] 9934741 9934742 9934743 9934744 9934745 9934746 9934747 9934748 9934749 9934750 9934751 9934752
+##  [121] 9934753 9934754 9934755 9934756 9934757 9934758 9934759 9934760 9934761 9934762 9934763 9934764
+##  [133] 9934765 9934766 9934767 9934768 9934769 9934770 9934771 9934772 9934773 9934774 9934775 9934776
+##  [145] 9934777 9934778 9934779 9934780 9934781 9934782 9934783 9934784 9934785 9934786 9934787 9934788
+##  [157] 9934789 9934790 9934791 9934792 9934793 9934794 9934795 9934796 9934797 9934798 9934799 9934800
+##  [169] 9934801 9934802 9934803 9934804 9934805 9934806 9934807 9934808 9934809 9934810 9934811 9934812
+##  [181] 9934813 9934814 9934815 9934816 9934817 9934818 9934819 9934820 9934821 9934822 9934823 9934824
+##  [193] 9934825 9934826 9934827 9934828 9934829 9934830 9934831 9934832 9934833 9934834 9934835 9934836
+##  [205] 9934837 9934838 9934839 9934840 9934841 9934842 9934843 9934844 9934845 9934846 9934847 9934848
+##  [217] 9934849 9934850 9934851 9934852 9934853 9934854 9934855 9934856 9934857 9934858 9934859 9934860
+##  [229] 9934861 9934862 9934863 9934864 9934865 9934866 9934867 9934868 9934869 9934870 9934871 9934872
+##  [241] 9934873 9934874 9934875 9934876 9934877 9934878 9934879 9934880 9934881 9934882 9934883 9934884
+##  [253] 9934885 9934886 9934887 9934888 9934889 9934890 9934891 9934892 9934893 9934894 9934895 9934896
+##  [265] 9934897 9934898 9934899 9934900 9934901 9934902 9934903 9934904 9934905 9934906 9934907 9934908
+##  [277] 9934909 9934910 9934911 9934912 9934913 9934914 9934915 9934916 9934917 9934918 9934919 9934920
+##  [289] 9934921 9934922 9934923 9934924 9934925 9934926 9934927 9934928 9934929 9934930 9934931 9934932
+##  [301] 9934933 9934934 9934935 9934936 9934937 9934938 9934939 9934940 9934941 9934942 9934943 9934944
+##  [313] 9934945 9934946 9934947 9934948 9934949 9934950 9934951 9934952 9934953 9934954 9934955 9934956
+##  [325] 9934957 9934958 9934959 9934960 9934961 9934962 9934963 9934964 9934965 9934966 9934967 9934968
+##  [337] 9934969 9934970 9934971 9934972 9934973 9934974 9934975 9934976 9934977 9934978 9934979 9934980
+##  [349] 9934981 9934982 9934983 9934984 9934985 9934986 9934987 9934988 9934989 9934990 9934991 9934992
+##  [361] 9934993 9934994 9934995 9934996 9934997 9934998 9934999 9935000 9935001 9935002 9935003 9935004
+##  [373] 9935005 9935006 9935007 9935008 9935009 9935010 9935011 9935012 9935013 9935014 9935015 9935016
+##  [385] 9935017 9935018 9935019 9935020 9935021 9935022 9935023 9935024 9935025 9935026 9935027 9935028
+##  [397] 9935029 9935030 9935031 9935032 9935033 9935034 9935035 9935036 9935037 9935038 9935039 9935040
+##  [409] 9935041 9935042 9935043 9935044 9935045 9935046 9935047 9935048 9935049 9935050 9935051 9935052
+##  [421] 9935053 9935054 9935055 9935056 9935057 9935058 9935059 9935060 9935061 9935062 9935063 9935064
+##  [433] 9935065 9935066 9935067 9935068 9935069 9935070 9935071 9935072 9935073 9935074 9935075 9935076
+##  [445] 9935077 9935078 9935079 9935080 9935081 9935082 9935083 9935084 9935085 9935086 9935087 9935088
+##  [457] 9935089 9935090 9935091 9935092 9935093 9935094 9935095 9935096 9935097 9935098 9935099 9935100
+##  [469] 9935101 9935102 9935103 9935104 9935105 9935106 9935107 9935108 9935109 9935110 9935111 9935112
+##  [481] 9935113 9935114 9935115 9935116 9935117 9935118 9935119 9935120 9935121 9935122 9935123 9935124
+##  [493] 9935125 9935126 9935127 9935128 9935129 9935130 9935131 9935132 9935133 9935134 9935135 9935136
+##  [505] 9935137 9935138 9935139 9935140 9935141 9935142 9935143 9935144 9935145 9935146 9935147 9935148
+##  [517] 9935149 9935150 9935151 9935152 9935153 9935154 9935155 9935156 9935157 9935158 9935159 9935160
+##  [529] 9935161 9935162 9935163 9935164 9935165 9935166 9935167 9935168 9935169 9935170 9935171 9935172
+##  [541] 9935173 9935174 9935175 9935176 9935177 9935178 9935179 9935180 9935181 9935182 9935183 9935184
+##  [553] 9935185 9935186 9935187 9935188 9935189 9935190 9935191 9935192 9935193 9935194 9935195 9935196
+##  [565] 9935197 9935198 9935199 9935200 9935201 9935202 9935203 9935204 9935205 9935206 9935207 9935208
+##  [577] 9935209 9935210 9935211 9935212 9935213 9935214 9935215 9935216 9935217 9935218 9935219 9935220
+##  [589] 9935221 9935222 9935223 9935224 9935225 9935226 9935227 9935228 9935229 9935230 9935231 9935232
+##  [601] 9935233 9935234 9935235 9935236 9935237 9935238 9935239 9935240 9935241 9935242 9935243 9935244
+##  [613] 9935245 9935246 9935247 9935248 9935249 9935250 9935251 9935252 9935253 9935254 9935255 9935256
+##  [625] 9935257 9935258 9935259 9935260 9935261 9935262 9935263 9935264 9935265 9935266 9935267 9935268
+##  [637] 9935269 9935270 9935271 9935272 9935273 9935274 9935275 9935276 9935277 9935278 9935279 9935280
+##  [649] 9935281 9935282 9935283 9935284 9935285 9935286 9935287 9935288 9935289 9935290 9935291 9935292
+##  [661] 9935293 9935294 9935295 9935296 9935297 9935298 9935299 9935300 9935301 9935302 9935303 9935304
+##  [673] 9935305 9935306 9935307 9935308 9935309 9935310 9935311 9935312 9935313 9935314 9935315 9935316
+##  [685] 9935317 9935318 9935319 9935320 9935321 9935322 9935323 9935324 9935325 9935326 9935327 9935328
+##  [697] 9935329 9935330 9935331 9935332 9935333 9935334 9935335 9935336 9935337 9935338 9935339 9935340
+##  [709] 9935341 9935342 9935343 9935344 9935345 9935346 9935347 9935348 9935349 9935350 9935351 9935352
+##  [721] 9935353 9935354 9935355 9935356 9935357 9935358 9935359 9935360 9935361 9935362 9935363 9935364
+##  [733] 9935365 9935366 9935367 9935368 9935369 9935370 9935371 9935372 9935373 9935374 9935375 9935376
+##  [745] 9935377 9935378 9935379 9935380 9935381 9935382 9935383 9935384 9935385 9935386 9935387 9935388
+##  [757] 9935389 9935390 9935391 9935392 9935393 9935394 9935395 9935396 9935397 9935398 9935399 9935400
+##  [769] 9935401 9935402 9935403 9935404 9935405 9935406 9935407 9935408 9935409 9935410 9935411 9935412
+##  [781] 9935413 9935414 9935415 9935416 9935417 9935418 9935419 9935420 9935421 9935422 9935423 9935424
+##  [793] 9935425 9935426 9935427 9935428 9935429 9935430 9935431 9935432 9935433 9935434 9935435 9935436
+##  [805] 9935437 9935438 9935439 9935440 9935441 9935442 9935443 9935444 9935445 9935446 9935447 9935448
+##  [817] 9935449 9935450 9935451 9935452 9935453 9935454 9935455 9935456 9935457 9935458 9935459 9935460
+##  [829] 9935461 9935462 9935463 9935464 9935465 9935466 9935467 9935468 9935469 9935470 9935471 9935472
+##  [841] 9935473 9935474 9935475 9935476 9935477 9935478 9935479 9935480 9935481 9935482 9935483 9935484
+##  [853] 9935485 9935486 9935487 9935488 9935489 9935490 9935491 9935492 9935493 9935494 9935495 9935496
+##  [865] 9935497 9935498 9935499 9935500 9935501 9935502 9935503 9935504 9935505 9935506 9935507 9935508
+##  [877] 9935509 9935510 9935511 9935512 9935513 9935514 9935515 9935516 9935517 9935518 9935519 9935520
+##  [889] 9935521 9935522 9935523 9935524 9935525 9935526 9935527 9935528 9935529 9935530 9935531 9935532
+##  [901] 9935533 9935534 9935535 9935536 9935537 9935538 9935539 9935540 9935541 9935542 9935543 9935544
+##  [913] 9935545 9935546 9935547 9935548 9935549 9935550 9935551 9935552 9935553 9935554 9935555 9935556
+##  [925] 9935557 9935558 9935559 9935560 9935561 9935562 9935563 9935564 9935565 9935566 9935567 9935568
+##  [937] 9935569 9935570 9935571 9935572 9935573 9935574 9935575 9935576 9935577 9935578 9935579 9935580
+##  [949] 9935581 9935582 9935583 9935584 9935585 9935586 9935587 9935588 9935589 9935590 9935591 9935592
+##  [961] 9935593 9935594 9935595 9935596 9935597 9935598 9935599 9935600 9935601 9935602 9935603 9935604
+##  [973] 9935605 9935606 9935607 9935608 9935609 9935610 9935611 9935612 9935613 9935614 9935615 9935616
+##  [985] 9935617 9935618 9935619 9935620 9935621 9935622 9935623 9935624 9935625 9935626 9935627 9935628
+##  [997] 9935629 9935630 9935631 9935632
+##  [ reached getOption("max.print") -- omitted 2482658 entries ]
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{dim}\NormalTok{(heartrate\_second)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2483658       5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{heartrate\_second }\OtherTok{\textless{}{-}} \FunctionTok{na.omit}\NormalTok{(heartrate\_second)}
+\NormalTok{breaks }\OtherTok{\textless{}{-}} \FunctionTok{hour}\NormalTok{(}\FunctionTok{hm}\NormalTok{(}\StringTok{"6:00"}\NormalTok{, }\StringTok{"12:00"}\NormalTok{, }\StringTok{"16:00"}\NormalTok{, }\StringTok{"19:00"}\NormalTok{, }\StringTok{"23:59"}\NormalTok{))}
+
+\CommentTok{\# labels for the breaks}
+
+\NormalTok{labels }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Morning"}\NormalTok{, }\StringTok{"Afternoon"}\NormalTok{, }\StringTok{"Evening"}\NormalTok{, }\StringTok{"Night"}\NormalTok{)}
+\NormalTok{heartrate\_second}\SpecialCharTok{$}\NormalTok{Time\_of\_day }\OtherTok{\textless{}{-}} \FunctionTok{cut}\NormalTok{(}\AttributeTok{x=}\FunctionTok{hour}\NormalTok{(heartrate\_second}\SpecialCharTok{$}\NormalTok{time), }\AttributeTok{breaks =}\NormalTok{ breaks, }\AttributeTok{labels =}\NormalTok{ labels, }\AttributeTok{include.lowest=}\ConstantTok{TRUE}\NormalTok{)}
+
+
+\CommentTok{\# Plotting Data on graphs}
+
+\CommentTok{\# Sleep Data {-} Visualization between Total Min Asleep and Total Time in Bed}
+
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{sleepday, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{TotalMinutesAsleep, }\AttributeTok{y=}\NormalTok{TotalTimeInBed)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method=}\NormalTok{lm) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Total Minutes Asleep vs Total Time in Bed"}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{bellabeat_analysis_files/figure-latex/unnamed-chunk-1-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# From the graph it is clear that both the points are almost around the straight line except for few.}
+\CommentTok{\# We can consider this people mostly fall asleep right after they get into bed. By this Bellabeat can}
+\CommentTok{\# include a feature that indicates a reminder to sleep for users in and around their daily sleep time. }
+
+\CommentTok{\# Mean Heart Beat Histogram}
+
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{heartbeat\_daily, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{MeanHeartBeat)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_histogram}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Mean Heart Beat Histogram"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\includegraphics{bellabeat_analysis_files/figure-latex/unnamed-chunk-1-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Heart Rate Graph during different times of the day}
+
+\NormalTok{heartbeat\_grouping }\OtherTok{\textless{}{-}} 
+  \FunctionTok{tibble}\NormalTok{(heartrate\_second }\SpecialCharTok{\%\textgreater{}\%}
+           \FunctionTok{group\_by}\NormalTok{(Time\_of\_day) }\SpecialCharTok{\%\textgreater{}\%}
+           \FunctionTok{summarise}\NormalTok{(}\AttributeTok{MeanValue=}\NormalTok{(}\FunctionTok{mean}\NormalTok{(Value))))}
+
+\NormalTok{heartbeat\_grouping }\OtherTok{\textless{}{-}}\NormalTok{ heartbeat\_grouping }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{drop\_na}\NormalTok{()}
+
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ heartbeat\_grouping, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Time\_of\_day, }\AttributeTok{y=}\NormalTok{MeanValue)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Time of Day vs Mean Heart Value"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bellabeat_analysis_files/figure-latex/unnamed-chunk-1-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# On an average heartbeat of people during evening is high and night it is very low.}
+
+\CommentTok{\# Daily Activity Total steps vs Calories}
+
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{dailyactivity, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{TotalSteps, }\AttributeTok{y=}\NormalTok{Calories)) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method=}\NormalTok{lm) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"Total Steps VS Total Calories"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{bellabeat_analysis_files/figure-latex/unnamed-chunk-1-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Total distance vs Total steps}
+
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{dailyactivity, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{TotalSteps, }\AttributeTok{y=}\NormalTok{TotalDistance)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =}\NormalTok{ lm) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Total Steps VS Distance"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{bellabeat_analysis_files/figure-latex/unnamed-chunk-1-5.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Total distance vs Tracker Distance}
+
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{dailyactivity, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{TrackerDistance, }\AttributeTok{y=}\NormalTok{TotalDistance)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_smooth}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{TrackerDistance, }\AttributeTok{y=}\NormalTok{TotalDistance)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Tracker Distance VS Total Distance"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{bellabeat_analysis_files/figure-latex/unnamed-chunk-1-6.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Very Active Minutes vs Calories}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{dailyactivity, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{VeryActiveMinutes , }\AttributeTok{y=}\NormalTok{Calories)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_smooth}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{VeryActiveMinutes , }\AttributeTok{y=}\NormalTok{Calories)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Very Active Minutes VS Calories"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{bellabeat_analysis_files/figure-latex/unnamed-chunk-1-7.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Fairly Active Minutes vs Calories}
+
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{dailyactivity, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{FairlyActiveMinutes, }\AttributeTok{y=}\NormalTok{Calories)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_smooth}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{FairlyActiveMinutes , }\AttributeTok{y=}\NormalTok{Calories)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Fairly Active Minutes VS Calories"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{bellabeat_analysis_files/figure-latex/unnamed-chunk-1-8.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Lightly Active Minutes vs Calories}
+\FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{dailyactivity, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{LightlyActiveMinutes, }\AttributeTok{y=}\NormalTok{Calories)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+} 
+  \FunctionTok{geom\_smooth}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{LightlyActiveMinutes, }\AttributeTok{y=}\NormalTok{Calories)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Lightly Active Minutes vs Calories"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+\end{verbatim}
+
+\includegraphics{bellabeat_analysis_files/figure-latex/unnamed-chunk-1-9.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{export.type }\OtherTok{\textless{}{-}} \StringTok{"jpeg"}
+\NormalTok{export.filename }\OtherTok{\textless{}{-}} \StringTok{"Lightly Active Minutes vs Calories.jpeg"}
+\NormalTok{export.height }\OtherTok{\textless{}{-}} \DecValTok{123}
+\NormalTok{export.width}\OtherTok{\textless{}{-}} \DecValTok{123}
+
+\NormalTok{export.func }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(export.type,}\StringTok{"("}\NormalTok{,export.filename,}\StringTok{")"}\NormalTok{)}
+
+\FunctionTok{eval}\NormalTok{(}\FunctionTok{parse}\NormalTok{(}\AttributeTok{text=}\StringTok{"export.func"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "jpeg(Lightly Active Minutes vs Calories.jpeg)"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Correlation Matrix of daily activity data}
+
+\NormalTok{selected\_columns }\OtherTok{\textless{}{-}} \FunctionTok{select}\NormalTok{(dailyactivity, TotalSteps, TotalDistance, VeryActiveMinutes, SedentaryMinutes, Calories)}
+\NormalTok{corr }\OtherTok{=} \FunctionTok{cor}\NormalTok{(selected\_columns)}
+\FunctionTok{corrplot}\NormalTok{(corr, }\AttributeTok{method =} \StringTok{\textquotesingle{}number\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{bellabeat_analysis_files/figure-latex/unnamed-chunk-1-10.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Graphs on combined\_data of 3 records}
+
+\CommentTok{\# Saving Modified Files}
+
+\FunctionTok{write\_csv}\NormalTok{(}\AttributeTok{x =}\NormalTok{ heartbeat\_grouping, }\StringTok{"heartbeat\_timeofday.csv"}\NormalTok{)}
+\FunctionTok{write\_csv}\NormalTok{(}\AttributeTok{x =}\NormalTok{ heartbeat\_daily, }\StringTok{"heartbeat\_daywise.csv"}\NormalTok{)}
+\FunctionTok{write\_csv}\NormalTok{(}\AttributeTok{x =}\NormalTok{ combined\_df, }\StringTok{"combined\_data.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}
