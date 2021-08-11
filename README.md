@@ -1,3 +1,3 @@
 # Google-Data-Analytics-Capstone
 
-Bellabeat Smart Watch Data Analysis
+Bellabeat Smart Products Data Analysis
